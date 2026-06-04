@@ -15,10 +15,11 @@ const getPostById = async (req, res) => {
   try {
     const post = await postService.getPostById(req.params.id);
 
-    if (!post)
+    if (!post) {
       return res.status(404).json({
         error: 'Post not found',
       });
+    }
 
     res.json(post);
   } catch (err) {
@@ -39,10 +40,11 @@ const createPost = async (req, res) => {
 
     const author = await postService.getAuthor(authorId);
 
-    if (!author)
+    if (!author) {
       return res.status(404).json({
         error: 'Author not found',
       });
+    }
 
     const post = await postService.createPost({
       title,
